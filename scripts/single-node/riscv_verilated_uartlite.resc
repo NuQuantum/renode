@@ -14,9 +14,6 @@ $uartMacOS?=@https://dl.antmicro.com/projects/renode/libVuartlite-macOS-x86_64-1
 
 showAnalyzer uart
 
-uart SimulationFilePathLinux $uartLinux
-uart SimulationFilePathWindows $uartWindows
-# uart SimulationFilePathMacOS $uartMacOS
 
 macro reset
 """

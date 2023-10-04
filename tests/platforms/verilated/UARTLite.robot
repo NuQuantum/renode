@@ -59,14 +59,21 @@ Create Machine With Socket Based Communication
     Execute Command                             uart SimulationFilePathWindows ${vuartlite_windows}
     Execute Command                             uart SimulationFilePathMacOS ${vuartlite_macos}
 
+Create Machine With Native Based Communication
+    [Arguments]         ${vuartlite_linux}      ${vuartlite_windows}    ${vuartlite_macos}
+    Execute Command                 uart SimulationFilePathLinux ${vuartlite_linux}
+    Execute Command                 uart SimulationFilePathWindows ${vuartlite_windows}
+    Execute Command                 uart SimulationFilePathMacOS ${vuartlite_macos}
+
 *** Test Cases ***
 Should Run UARTLite Binary From Script
     [Tags]                          skip_osx
 
-    Execute Command                 \$uartLinux?=${UARTLITE_NATIVE_LINUX}
-    Execute Command                 \$uartWindows?=${UARTLITE_NATIVE_WINDOWS}
-    Execute Command                 \$uartMacOS?=${UARTLITE_NATIVE_MACOS}
+    # Execute Command                 \$uartLinux?=${UARTLITE_NATIVE_LINUX}
+    # Execute Command                 \$uartWindows?=${UARTLITE_NATIVE_WINDOWS}
+    # Execute Command                 \$uartMacOS?=${UARTLITE_NATIVE_MACOS}
     Execute Script                  ${UARTLITE_SCRIPT}
+    Create Machine With Native Based Communication  ${UARTLITE_NATIVE_LINUX}  ${UARTLITE_NATIVE_WINDOWS}  ${UARTLITE_NATIVE_MACOS}
     Create Terminal Tester          ${UART}
     Start Emulation
     Wait For Line On Uart           I'm alive! counter = 10

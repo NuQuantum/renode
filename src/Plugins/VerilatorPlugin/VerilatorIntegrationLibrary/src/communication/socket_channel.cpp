@@ -7,11 +7,13 @@
 
 #include "socket_channel.h"
 
+auto LogPrinter = [](const std::string& strLogMsg) { std::cout << strLogMsg << std::endl;  };
+
 SocketCommunicationChannel::SocketCommunicationChannel()
 {
-    ASocket::SettingsFlag dontLog = ASocket::NO_FLAGS;
-    mainSocket.reset(new CTCPClient(NULL, dontLog));
-    senderSocket.reset(new CTCPClient(NULL, dontLog));
+    ASocket::SettingsFlag dontLog = ASocket::ALL_FLAGS;
+    mainSocket.reset(new CTCPClient(LogPrinter, dontLog));
+    senderSocket.reset(new CTCPClient(LogPrinter, dontLog));
 }
 
 void SocketCommunicationChannel::connect(int receiverPort, int senderPort, const char* address)
